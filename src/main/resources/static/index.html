@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Countries</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.34/system.js"></script>
+  <script>
+    System.config({
+      transpiler: 'babel',
+      packages: {
+        './app': { defaultExtension: 'js' }
+      },
+      map: {
+        'react-dom': '//cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js',
+        'react': '//cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js',
+        'babel': '//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js',
+        'redux': '//cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.min.js',
+        'react-redux': '//cdnjs.cloudflare.com/ajax/libs/react-redux/5.0.1/react-redux.min.js',
+        'redux-thunk': '//cdnjs.cloudflare.com/ajax/libs/redux-thunk/2.1.0/redux-thunk.min.js'
+      }
+    });
+    System
+      .import('./index.js')
+      .catch(err => console.error('Global error:', err));
+  </script>
+</body>
+</html>
