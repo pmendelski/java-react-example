@@ -1,27 +1,18 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCountriesIfNeeded } from './actions';
-import CountryListing from './CountryListing';
-import Loading from '../components/Loading';
+import { fetchCountries } from './actions';
+import CountryList from './CountryList';
+import LazyComponent from '../components/LazyComponent';
 
-class Countries extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchCountriesIfNeeded());
-  }
-  render() {
-    return this.props.isLoaded ?
-      <CountryListing /> :
-      <Loading />;
-  }
-}
-
-Countries.propTypes = {
-  isLoaded: PropTypes.bool.isRequired
-};
-
-const mapStateToProps = state => ({
-  isLoaded: (state.countries.items != null &&
-    !state.countries.isFetching)
+const mapState = state => ({
+  isReady: !!state.countries.items,
+  children: <CountryList />
 });
 
-export default connect(mapStateToProps)(Countries);
+const mapDispatch = dispatch => ({
+  load: () => dispatch(fetchCountries())
+});
+
+const Countries = connect(mapState, mapDispatch)(LazyComponent);
+
+export default Countries;

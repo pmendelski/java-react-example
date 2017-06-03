@@ -6,8 +6,11 @@ import Countries from './countries/Countries';
 const App = () => (
   <Provider store={store}>
     <div>
+      <small>Project: java-react-example</small>
       <h1>Countries</h1>
-      <Countries />
+      <div className="container">
+        <Countries />
+      </div>
     </div>
   </Provider>
 );

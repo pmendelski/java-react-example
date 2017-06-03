@@ -1,34 +1,33 @@
-import {
-  REQUEST_COUNTRIES,
-  RECEIVE_COUNTRIES,
-  CHANGE_FILTER
-} from './actions';
+import { CHANGE_FILTER, RECEIVE_COUNTRIES, REQUEST_COUNTRIES } from './actions';
+
+const requestCountries = () => ({
+  items: null
+});
+
+const receiveCountries = (state, action) => ({
+  items: action.response.countries
+});
+
+const changeFilter = (state, action) => ({
+  filter: action.filter
+});
+
+const handlers = {
+  [REQUEST_COUNTRIES]: requestCountries,
+  [RECEIVE_COUNTRIES]: receiveCountries,
+  [CHANGE_FILTER]: changeFilter
+};
 
 const initialState = {
   items: null,
-  isFetching: false,
   filter: ''
 };
 
 const countriesReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CHANGE_FILTER:
-      return Object.assign({}, state, {
-        filter: action.filter
-      });
-    case RECEIVE_COUNTRIES:
-      return Object.assign({}, state, {
-        items: action.response.countries,
-        isFetching: false
-      });
-    case REQUEST_COUNTRIES:
-      return Object.assign({}, state, {
-        items: [],
-        isFetching: true
-      });
-    default:
-      return state;
-  }
+  const handler = handlers[action.type];
+  return handler ?
+    Object.assign({}, state, handler(state, action)) :
+    state;
 };
 
 export default countriesReducer;

@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import countriesReducer from './countries/reducer';
 

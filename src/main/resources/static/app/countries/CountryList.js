@@ -1,13 +1,16 @@
-import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { changeFilter } from './actions';
+import FilterableList from '../components/FilterableList';
 
-const CountryList = ({ countries }) => {
-  const items = countries
-    .map(country => (<li key={country}>{country}</li>));
-  return (<ul>{items}</ul>);
-};
+const mapStateToProps = state => ({
+  items: state.countries.items,
+  filter: state.countries.filter
+});
 
-CountryList.propTypes = {
-  countries: PropTypes.arrayOf(PropTypes.string)
-};
+const mapDispatchToProps = dispatch => ({
+  onFilterChange: (filter) => dispatch(changeFilter(filter))
+});
+
+const CountryList = connect(mapStateToProps, mapDispatchToProps)(FilterableList);
 
 export default CountryList;

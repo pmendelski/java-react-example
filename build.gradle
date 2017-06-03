@@ -1,10 +1,10 @@
 buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE'
-    }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE'
+  }
 }
 
 apply plugin: 'java'
@@ -12,26 +12,30 @@ apply plugin: 'groovy'
 apply plugin: 'org.springframework.boot'
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-devtools"
-    testCompile "org.springframework.boot:spring-boot-starter-test"
-    testCompile "org.spockframework:spock-spring:1.0-groovy-2.4"
+  compile(
+      "org.springframework.boot:spring-boot-starter-web",
+      "org.springframework.boot:spring-boot-devtools"
+  )
+  testCompile(
+      "org.springframework.boot:spring-boot-starter-test",
+      "org.spockframework:spock-spring:1.0-groovy-2.4"
+  )
 }
 
 tasks.withType(Test) {
-    testLogging {
-        exceptionFormat = 'full'
-        events 'passed', 'skipped', 'failed'
-    }
+  testLogging {
+    exceptionFormat = 'full'
+    events 'passed', 'skipped', 'failed'
+  }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.2'
+  gradleVersion = '3.5'
 }
