@@ -1,2 +1,5 @@
 server:
     port: 7071
+    compression:
+      enabled: true
+      minResponseSize: 1
